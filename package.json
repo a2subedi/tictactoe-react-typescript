@@ -1,6 +1,7 @@
 {
   "name": "tictactoe",
   "version": "0.1.0",
+  "author": {"name": "asubedi","email": "subedabh@b-tu.de","url": "https://github.com/a2subedi"},
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
