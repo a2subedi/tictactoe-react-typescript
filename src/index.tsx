@@ -82,15 +82,15 @@ class Game extends React.Component<gameProps, gameState> {
 
   handleClick(i: number) {
     let tmpHistory = this.state.boardHistory.slice(0, this.state.stepNumber + 1);
-    let current = {...tmpHistory[tmpHistory.length - 1]};
-    let tmpSquares = {...current};
-    if (calculateWinner(tmpSquares.squares) || tmpSquares.squares[i]) {
+    let current = tmpHistory[tmpHistory.length - 1];
+    let tmpSquares = current.squares.slice();
+    if (calculateWinner(tmpSquares) || tmpSquares[i]) {
       return;
     }
-    tmpSquares.squares[i] = this.state.xISNext ? 'x' : 'o';
+    tmpSquares[i] = this.state.xISNext ? 'x' : 'o';
     this.setState({
       boardHistory: tmpHistory.concat([{
-        'squares':tmpSquares.squares
+        'squares':tmpSquares
       }]),
       stepNumber: tmpHistory.length,
       xISNext: !this.state.xISNext,
@@ -105,9 +105,8 @@ class Game extends React.Component<gameProps, gameState> {
   }
 
   render() {
-
     const tmpHistory = this.state.boardHistory;
-    const current = tmpHistory[tmpHistory.length-1];
+    const current = tmpHistory[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
     const moves = tmpHistory.map((step, move) => {
